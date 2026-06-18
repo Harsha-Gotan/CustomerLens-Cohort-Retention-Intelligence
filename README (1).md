@@ -6,7 +6,7 @@
 
 ## 📌 Live Dashboard
 
-🔗 **[View on Tableau Public](#)** ← *Replace with your Tableau Public link*
+🔗 **[View on Tableau Public](#)** ← https://public.tableau.com/app/profile/harsha.gotan/viz/CustomerLensCohortRetentionIntelligence/CustomerSegmentationChurnAnalysis?publish=yes
 
 ---
 
@@ -37,19 +37,26 @@ CustomerLens/
 ```
 
 ---
+## Dashboard Preview
+
+<img width="1597" height="897" alt="Screenshot 2026-06-17 230408" src="https://github.com/user-attachments/assets/94f20db3-b2af-4d8a-8bff-66792ac2495b" />
+
+<img width="1602" height="897" alt="Screenshot 2026-06-17 230328" src="https://github.com/user-attachments/assets/7f64a105-2303-4480-ae99-158f1ed8376d" />
+
+---
 
 ## 🧩 Business Problem
 
 In e-commerce, acquiring a customer is only half the battle. The real challenge is understanding:
 
-- **Who keeps coming back** — and why?
-- **When do customers leave** — and at what point in their journey?
-- **Who drives the most revenue** — and are we at risk of losing them?
-- **Which customer segments deserve immediate attention** — before it is too late?
+- **Who keeps coming back** - and why?
+- **When do customers leave** - and at what point in their journey?
+- **Who drives the most revenue** - and are we at risk of losing them?
+- **Which customer segments deserve immediate attention** - before it is too late?
 
 Without answers to these questions, businesses make acquisition decisions blindly, waste retention budgets on the wrong customers, and fail to act on early churn signals.
 
-**CustomerLens** addresses this by building a complete customer intelligence system — from raw transaction data to actionable segmentation — using a real UK retail dataset spanning 2 full years.
+**CustomerLens** addresses this by building a complete customer intelligence system - from raw transaction data to actionable segmentation - using a real UK retail dataset spanning 2 full years.
 
 ---
 
@@ -85,7 +92,7 @@ Without answers to these questions, businesses make acquisition decisions blindl
 | Attribute | Detail |
 |---|---|
 | Scope | UK transactions only |
-| Period | January 2010 — December 2011 |
+| Period | January 2010 - December 2011 |
 | Raw rows | 1,048,575 |
 | After cleaning | 685,639 |
 | Unique customers | 5,252 |
@@ -96,7 +103,7 @@ Without answers to these questions, businesses make acquisition decisions blindl
 
 | Column | Description |
 |---|---|
-| Invoice | Transaction ID — prefixed 'C' for cancellations |
+| Invoice | Transaction ID - prefixed 'C' for cancellations |
 | StockCode | Product identifier |
 | Description | Product name |
 | Quantity | Units purchased |
@@ -144,15 +151,15 @@ The full workflow lives in `notebooks/CustomerLens_Analysis.ipynb` and runs in f
 |---|---|---|
 | Cohort_Month | Min(InvoiceDate) per Customer ID → Period('M') | Assigns each customer to their acquisition cohort |
 | Invoice_Month | InvoiceDate → Period('M') | Month of each transaction |
-| Cohort_Index | Invoice_Month − Cohort_Month | Months elapsed since first purchase (0–23) |
-| Recency | Reference date − Last purchase date (days) | How recently a customer purchased |
+| Cohort_Index | Invoice_Month - Cohort_Month | Months elapsed since first purchase (0–23) |
+| Recency | Reference date - Last purchase date (days) | How recently a customer purchased |
 | Frequency | Count of unique invoices per customer | How often a customer purchases |
 | Monetary | Sum of Revenue per customer | Total spend per customer |
 | CLTV | Monetary × Frequency | Customer Lifetime Value proxy |
 | Churn_Flag | 1 if Recency > 90 days, else 0 | Binary churn indicator |
 
 ### Stage 5 — RFM Scoring & Segmentation
-- Scored each customer 1–4 on Recency, Frequency and Monetary using quartile-based `pd.qcut()`
+- Scored each customer 1-4 on Recency, Frequency and Monetary using quartile-based `pd.qcut()`
 - Applied business logic to assign one of 7 segment labels
 - Exported two CSVs: Customer Level (5,252 rows) and Transaction Level (685,639 rows)
 
@@ -161,7 +168,7 @@ The full workflow lives in `notebooks/CustomerLens_Analysis.ipynb` and runs in f
 ## 📊 Dashboard Walkthrough
 
 ### Dashboard 1 — Cohort & Retention Intelligence
-*Analysing customer acquisition cohorts and revenue retention patterns across 24 months | Jan 2010 – Dec 2011*
+*Analysing customer acquisition cohorts and revenue retention patterns across 24 months | Jan 2010 - Dec 2011*
 
 **KPI Banner**
 | KPI | Value |
@@ -172,7 +179,7 @@ The full workflow lives in `notebooks/CustomerLens_Analysis.ipynb` and runs in f
 | Avg CLTV | £90,852 |
 
 **Visual 1 — Cohort Retention Heatmap**  
-A 24×24 matrix where rows represent acquisition cohort months and columns represent months since first purchase (Cohort Index 0–23). Colour intensity shows how many customers from each cohort are still active at each point in time. Darker red = higher retention. The classic triangle shape confirms healthy repeat purchase behaviour in early cohort indexes, tapering as expected over time.
+A 24×24 matrix where rows represent acquisition cohort months and columns represent months since first purchase (Cohort Index 0-23). Colour intensity shows how many customers from each cohort are still active at each point in time. Darker red = higher retention. The classic triangle shape confirms healthy repeat purchase behaviour in early cohort indexes, tapering as expected over time.
 
 **Visual 2 — Cohort Revenue Heatmap**  
 Same grid structure as the retention heatmap but values represent total revenue generated by each cohort at each cohort index. This answers not just "did customers return?" but "how much were those returning customers worth?" — a distinction most portfolios miss.
@@ -183,7 +190,7 @@ A bar chart showing the average transaction value for customers acquired in each
 ---
 
 ### Dashboard 2 — Customer Segmentation & Churn Analysis
-*Segmenting 5,252 customers by RFM behaviour, lifetime value, and churn patterns across demographics | Jan 2010 – Dec 2011*
+*Segmenting 5,252 customers by RFM behaviour, lifetime value, and churn patterns across demographics | Jan 2010 - Dec 2011*
 
 **KPI Banner**
 | KPI | Value |
@@ -194,10 +201,10 @@ A bar chart showing the average transaction value for customers acquired in each
 | Revenue at Risk | £2,889,272 |
 
 **Visual 4 — RFM Bubble Chart**  
-A scatter plot with Recency on the X axis, Frequency on the Y axis, bubble size representing Monetary value, and colour representing RFM Segment. Champions cluster in the top-left (low recency, high frequency). The "Cannot Lose Them" segment is visible further right — historically frequent buyers who have gone quiet.
+A scatter plot with Recency on the X axis, Frequency on the Y axis, bubble size representing Monetary value, and colour representing RFM Segment. Champions cluster in the top-left (low recency, high frequency). The "Cannot Lose Them" segment is visible further right - historically frequent buyers who have gone quiet.
 
 **Visual 5 — Churn Timeline**  
-A dual-axis chart with bars showing churned customer count by month and a line overlay showing the trend. A sharp spike in December 2010 followed by a dip reveals post-holiday churn patterns — a classic retail phenomenon.
+A dual-axis chart with bars showing churned customer count by month and a line overlay showing the trend. A sharp spike in December 2010 followed by a dip reveals post-holiday churn patterns - a classic retail phenomenon.
 
 **Visual 6 — CLTV by Age Band and Gender**  
 A grouped bar chart showing average CLTV split by age band and gender. The 26–35 Female segment significantly outperforms all other groups, providing a clear targeting insight for retention campaigns.
@@ -214,9 +221,9 @@ A treemap showing the proportional distribution of all 7 RFM segments by custome
 | 🔴 High churn rate | 50.8% of customers have not purchased in 90+ days |
 | 💰 Revenue at risk | £2,889,272 tied to churned customer base |
 | 🏆 Strong champion base | 31% of customers are Champions driving majority of revenue |
-| ⚠️ Cannot Lose Them segment | 623 high-frequency customers going quiet — urgent win-back needed |
-| 💎 Highest value demographic | 26–35 Female segment has highest average CLTV |
-| 📅 Seasonal churn spike | December 2010 saw sharpest churn spike — post-holiday drop-off |
+| ⚠️ Cannot Lose Them segment | 623 high-frequency customers going quiet - urgent win-back needed |
+| 💎 Highest value demographic | 26-35 Female segment has highest average CLTV |
+| 📅 Seasonal churn spike | December 2010 saw sharpest churn spike - post-holiday drop-off |
 | 📊 Best retention cohort | January 2010 cohort showed strongest long-term retention |
 | 🛒 Avg 6 purchases | Healthy repeat behaviour confirms dataset suitability for cohort analysis |
 
@@ -260,21 +267,6 @@ The December 2010 churn spike suggests customers acquired during holiday promoti
 
 ## 🚀 How to Run This Project
 
-### Prerequisites
-```
-Python 3.8+
-pandas
-numpy
-jupyter
-```
-
-### Installation
-```bash
-git clone https://github.com/yourusername/CustomerLens.git
-cd CustomerLens
-pip install pandas numpy jupyter
-```
-
 ### Steps
 1. Download the raw dataset from [Kaggle](https://kaggle.com/datasets/mashlyn/online-retail-ii-uci)
 2. Place `online_retail_II.csv` in the `data/` folder
@@ -293,22 +285,3 @@ pip install pandas numpy jupyter
 - **Synthetic Demographics:** Gender and Age are synthetically generated for portfolio demonstration purposes. All transaction behaviour is real.
 - **Reference Date:** Recency is calculated relative to December 5, 2011 (one day after the last transaction in the dataset).
 
----
-
-## 👤 Author
-
-**[Your Name]**  
-Data Analyst  
-📧 [your email]  
-🔗 [LinkedIn Profile]  
-💼 [Portfolio / Website]
-
----
-
-## 📄 License
-
-This project uses the UCI Online Retail II dataset under the Creative Commons Attribution 4.0 International license.
-
----
-
-*If you found this project useful, please consider giving it a ⭐ on GitHub!*
