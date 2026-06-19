@@ -118,7 +118,7 @@ Without answers to these questions, businesses make acquisition decisions blindl
 |---|---|
 | Gender | Synthetically generated per customer (Male / Female) |
 | Age | Synthetically generated from realistic age distribution |
-| Age_Band | Derived from Age — 18-25, 26-35, 36-45, 46-55, 56+ |
+| Age_Band | Derived from Age - 18-25, 26-35, 36-45, 46-55, 56+ |
 | Revenue | Quantity × Price per transaction |
 
 > **Note on Demographics:** The UCI dataset does not include demographic data. Gender and Age were synthetically generated per unique Customer ID using a fixed random seed (42) for full reproducibility. Transaction behaviour, dates, and revenue figures are entirely real.
@@ -141,7 +141,7 @@ The full workflow lives in `notebooks/CustomerLens_Analysis.ipynb` and runs in f
 - Added Revenue column (Quantity × Price)
 
 ### Stage 3 — Demographic Enrichment
-- Generated synthetic Gender (Male/Female) and Age (18–70) per unique Customer ID
+- Generated synthetic Gender (Male/Female) and Age (18-70) per unique Customer ID
 - Derived Age_Band categories
 - Merged demographics back into main dataframe
 
@@ -151,7 +151,7 @@ The full workflow lives in `notebooks/CustomerLens_Analysis.ipynb` and runs in f
 |---|---|---|
 | Cohort_Month | Min(InvoiceDate) per Customer ID → Period('M') | Assigns each customer to their acquisition cohort |
 | Invoice_Month | InvoiceDate → Period('M') | Month of each transaction |
-| Cohort_Index | Invoice_Month - Cohort_Month | Months elapsed since first purchase (0–23) |
+| Cohort_Index | Invoice_Month - Cohort_Month | Months elapsed since first purchase (0-23) |
 | Recency | Reference date - Last purchase date (days) | How recently a customer purchased |
 | Frequency | Count of unique invoices per customer | How often a customer purchases |
 | Monetary | Sum of Revenue per customer | Total spend per customer |
@@ -235,7 +235,7 @@ A treemap showing the proportional distribution of all 7 RFM segments by custome
 623 customers with proven high purchase frequency have gone quiet. A personalised re-engagement campaign with targeted offers could recover a significant portion of the £2.89M revenue at risk. Priority: High.
 
 **2. Champion Loyalty Programme**  
-31% of customers are Champions — invest in a formal loyalty or rewards programme to maintain this segment. Losing even 10% of Champions would have a disproportionate revenue impact.
+31% of customers are Champions - invest in a formal loyalty or rewards programme to maintain this segment. Losing even 10% of Champions would have a disproportionate revenue impact.
 
 **3. Replicate January 2010 Acquisition Strategy**  
 The Jan 2010 cohort showed the strongest long-term retention. Analysing what acquisition channels or promotions drove that cohort could inform future marketing spend.
@@ -247,7 +247,7 @@ This demographic generates nearly 4x the CLTV of comparable male customers. Targ
 The December 2010 churn spike suggests customers acquired during holiday promotions do not return. A structured January re-engagement sequence could convert seasonal buyers into repeat customers.
 
 **6. Accelerate New Customer Conversion**  
-310 customers are in the New Customer segment with only one purchase. A second-purchase incentive within 30 days of first purchase could significantly improve cohort retention at Index 1 — the most critical drop-off point.
+310 customers are in the New Customer segment with only one purchase. A second-purchase incentive within 30 days of first purchase could significantly improve cohort retention at Index 1 - the most critical drop-off point.
 
 ---
 
@@ -281,6 +281,6 @@ The December 2010 churn spike suggests customers acquired during holiday promoti
 
 - **Churn Definition:** A customer is defined as churned if their last purchase was more than 90 days before the dataset end date (December 2011). This threshold is standard in retail analytics and can be adjusted based on business context.
 - **CLTV Formula:** CLTV = Monetary × Frequency. This is a simplified historical CLTV proxy. A predictive CLTV model would incorporate average customer lifespan and discount rate.
-- **RFM Scoring:** Quartile-based scoring (1–4) using `pd.qcut()`. Frequency uses rank-based cutting to handle ties.
+- **RFM Scoring:** Quartile-based scoring (1-4) using `pd.qcut()`. Frequency uses rank-based cutting to handle ties.
 - **Synthetic Demographics:** Gender and Age are synthetically generated for portfolio demonstration purposes. All transaction behaviour is real.
 - **Reference Date:** Recency is calculated relative to December 5, 2011 (one day after the last transaction in the dataset).
